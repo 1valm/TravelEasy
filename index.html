@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelEasy - Бронирование экскурсионных туров</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" onclick="showPage('home')">
+                    <img src="img/TravelEasy1.svg" alt="TravelEasy">
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" onclick="showPage('home')">Главная</a></li>
+                        <li><a href="#" class="nav-link" onclick="showPage('catalog')">Каталог туров</a></li>
+                        <li><a href="#" class="nav-link" onclick="showPage('about')">О нас</a></li>
+                        <li><a href="#" class="nav-link" onclick="showPage('contacts')">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <div class="user-menu">
+                        <div class="user-avatar" onclick="toggleUserMenu()">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="#" onclick="showAccountSection('bookings')"><i class="fas fa-suitcase"></i> Мои бронирования</a>
+                            <a href="#" onclick="showAccountSection('history')"><i class="fas fa-history"></i> История заказов</a>
+                            <a href="#" onclick="showAccountSection('favorites')"><i class="fas fa-heart"></i> Избранное</a>
+                            <a href="#" onclick="showAccountSection('profile')"><i class="fas fa-cog"></i> Настройки профиля</a>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" id="loginBtn" onclick="showAuthModal('login')"><i class="fas fa-sign-in-alt"></i> Войти</button>
+                    <button class="btn btn-primary" id="registerBtn" onclick="showAuthModal('register')"><i class="fas fa-user-plus"></i> Регистрация</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="home" class="page-content active">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Откройте мир с TravelEasy</h1>
+                    <p>Найдите и забронируйте уникальные экскурсии по всему миру с лучшими гидами. Откройте для себя новые места и создайте незабываемые воспоминания.</p>
+                    <div class="search-box">
+                        <button onclick="showPage('catalog')"><i class="fas fa-search"></i> Найти экскурсии</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tours">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Популярные экскурсии</h2>
+                    <p>Откройте для себя самые востребованные туры, выбранные нашими путешественниками</p>
+                </div>
+                <div class="tours-grid" id="featured-tours"></div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="btn btn-primary" onclick="showPage('catalog')">Смотреть все туры</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Почему выбирают нас</h2>
+                    <p>TravelEasy предлагает уникальный опыт путешествий с заботой о каждом клиенте</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Безопасные платежи</h3>
+                        <p>Все транзакции защищены с использованием современных технологий шифрования.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-star"></i></div>
+                        <h3>Проверенные гиды</h3>
+                        <p>Все наши гиды проходят тщательный отбор и имеют сертификаты качества.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                        <h3>Поддержка 24/7</h3>
+                        <p>Наша команда поддержки всегда готова помочь вам в любое время суток.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-undo"></i></div>
+                        <h3>Гибкая отмена</h3>
+                        <p>Отмените бронирование бесплатно за 24 часа до начала экскурсии.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Отзывы путешественников</h2>
+                    <p>Узнайте, что говорят наши клиенты о своем опыте с TravelEasy</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Невероятный опыт! Гид был очень знающим и дружелюбным. Узнал так много о истории Москвы, которую никогда не найдешь в учебниках. Организация была на высшем уровне!"</p>
+                        <div class="testimonial-author">
+                            <img src="img/1.webp" alt="Мария Ковалева" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Мария Ковалева</h4>
+                                <span>Казань, Россия</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Поездка на Байкал превзошла все ожидания. Природа невероятная, а организация тура была безупречной. Особенно понравилась ночь в палатке на берегу озера. Обязательно вернусь снова!"</p>
+                        <div class="testimonial-author">
+                            <img src="img/2.webp" alt="Алексей Волков" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Алексей Волков</h4>
+                                <span>Новосибирск, Россия</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Золотое кольцо России - это для каждого, кто интересуется историей и культурой. Спасибо TravelEasy за прекрасную организацию! Гиды были профессионалами, а отели комфортабельными."</p>
+                        <div class="testimonial-author">
+                            <img src="img/3.jpeg" alt="Елена Смирнова" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Елена Смирнова</h4>
+                                <span>Сочи, Россия</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta">
+                    <div class="cta-content">
+                        <h2>Готовы к новым приключениям?</h2>
+                        <p>Присоединяйтесь к тысячам довольных путешественников и откройте для себя мир с TravelEasy</p>
+                        <button class="btn" onclick="showPage('catalog')">Начать планировать путешествие</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="catalog" class="page-content">
+        <section class="catalog-page">
+            <div class="container">
+                <div class="catalog-header">
+                    <h1 class="catalog-title">Каталог туров</h1>
+                    <div class="sort-options">
+                        <select id="sort-select" style="padding: 0.7rem 1.2rem; border: 2px solid var(--light-gray); border-radius: 12px; background: white; font-size: 1rem; cursor: pointer; transition: var(--transition);">
+                            <option value="popular">По популярности</option>
+                            <option value="price-low">Сначала дешевые</option>
+                            <option value="price-high">Сначала дорогие</option>
+                            <option value="rating">По рейтингу</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="catalog-layout">
+                    <div class="filters">
+                        <h2>Фильтры</h2>
+                        
+                        <div class="filter-group">
+                            <h3>Тип тура</h3>
+                            <div class="filter-options">
+                                <div class="filter-option"><input type="checkbox" id="type-historical" value="historical" checked><label for="type-historical">Исторические</label></div>
+                                <div class="filter-option"><input type="checkbox" id="type-nature" value="nature" checked><label for="type-nature">Природные</label></div>
+                                <div class="filter-option"><input type="checkbox" id="type-cultural" value="cultural" checked><label for="type-cultural">Культурные</label></div>
+                                <div class="filter-option"><input type="checkbox" id="type-adventure" value="adventure" checked><label for="type-adventure">Приключенческие</label></div>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h3>Цена, ₽</h3>
+                            <div class="price-range">
+                                <input type="number" class="price-input" placeholder="От" id="price-min" value="0">
+                                <input type="number" class="price-input" placeholder="До" id="price-max" value="20000">
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h3>Длительность</h3>
+                            <div class="filter-options">
+                                <div class="filter-option"><input type="checkbox" id="duration-1" value="1" checked><label for="duration-1">До 1 дня</label></div>
+                                <div class="filter-option"><input type="checkbox" id="duration-3" value="3" checked><label for="duration-3">2-3 дня</label></div>
+                                <div class="filter-option"><input type="checkbox" id="duration-7" value="7" checked><label for="duration-7">4-7 дней</label></div>
+                                <div class="filter-option"><input type="checkbox" id="duration-14" value="14" checked><label for="duration-14">Более 7 дней</label></div>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h3>Рейтинг</h3>
+                            <div class="filter-options">
+                                <div class="filter-option"><input type="checkbox" id="rating-5" value="4.5" checked><label for="rating-5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 4.5 и выше</label></div>
+                                <div class="filter-option"><input type="checkbox" id="rating-4" value="4.0" checked><label for="rating-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.0 и выше</label></div>
+                                <div class="filter-option"><input type="checkbox" id="rating-3" value="3.0" checked><label for="rating-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> 3.0 и выше</label></div>
+                            </div>
+                        </div>
+                        
+                        <button class="apply-filters" onclick="applyFilters()">Применить фильтры</button>
+                        <button class="btn-outline" style="width: 100%; margin-top: 0.5rem;" onclick="resetFilters()">Сбросить фильтры</button>
+                    </div>
+                    
+                    <div class="tours-list">
+                        <div class="tours-grid" id="catalog-tours"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="tour-detail" class="page-content">
+        <section class="tour-detail-page">
+            <div class="container">
+                <div id="tour-detail-content"></div>
+            </div>
+        </section>
+    </div>
+
+    <div id="booking" class="page-content">
+        <section class="tour-detail-page">
+            <div class="container">
+                <div class="tour-detail">
+                    <div class="tour-info">
+                        <div id="booking-tour-info"></div>
+                    </div>
+                    
+                    <div class="booking-form">
+                        <div class="booking-steps">
+                            <div class="booking-step step-active" id="step-1"><div class="step-number">1</div><div class="step-text">Данные</div></div>
+                            <div class="booking-step" id="step-2"><div class="step-number">2</div><div class="step-text">Оплата</div></div>
+                            <div class="booking-step" id="step-3"><div class="step-number">3</div><div class="step-text">Подтверждение</div></div>
+                        </div>
+                        
+                        <div id="booking-data" class="booking-section active">
+                            <h3>Данные для бронирования</h3>
+                            <div class="form-group"><label for="booking-date">Дата тура</label><input type="date" id="booking-date" required></div>
+                            <div class="form-group"><label for="booking-participants">Количество участников</label><select id="booking-participants"><option value="1">1 участник</option><option value="2">2 участника</option><option value="3">3 участника</option><option value="4">4 участника</option><option value="5">5 участников</option><option value="6">6 участников</option></select></div>
+                            <div class="form-group"><label for="booking-name">ФИО</label><input type="text" id="booking-name" placeholder="Иванов Иван Иванович" required></div>
+                            <div class="form-group"><label for="booking-email">Email</label><input type="email" id="booking-email" placeholder="example@mail.com" required></div>
+                            <div class="form-group"><label for="booking-phone">Телефон</label><input type="tel" id="booking-phone" placeholder="+7 (999) 999-99-99" required></div>
+                            <div class="form-group"><label for="booking-comment">Комментарий (необязательно)</label><textarea id="booking-comment" rows="3" style="width: 100%; padding: 0.9rem; border: 1px solid var(--light-gray); border-radius: 8px;"></textarea></div>
+                            <button class="book-now" onclick="goToPayment()">Перейти к оплате</button>
+                        </div>
+                        
+                        <div id="booking-payment" class="booking-section">
+                            <h3>Способ оплаты</h3>
+                            <div class="payment-methods">
+                                <div class="payment-method" onclick="selectPaymentMethod('card')"><div class="payment-icon"><i class="far fa-credit-card"></i></div><div>Банковская карта</div></div>
+                            </div>
+                            <div id="card-form" class="card-form">
+                                <div class="form-group"><label for="card-number">Номер карты</label><input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+                                <div class="form-group"><label for="card-expiry">Срок действия</label><input type="text" id="card-expiry" placeholder="ММ/ГГ" maxlength="5"></div>
+                                <div class="form-group"><label for="card-cvc">CVC</label><input type="text" id="card-cvc" placeholder="123" maxlength="3"></div>
+                                <div class="form-group"><label for="card-holder">Имя владельца</label><input type="text" id="card-holder" placeholder="IVAN IVANOV"></div>
+                            </div>
+                            <div class="confirmation-details">
+                                <div class="confirmation-item"><span>Тур:</span><span id="payment-tour-name">-</span></div>
+                                <div class="confirmation-item"><span>Дата:</span><span id="payment-date">-</span></div>
+                                <div class="confirmation-item"><span>Участники:</span><span id="payment-participants">-</span></div>
+                                <div class="confirmation-item"><span>Стоимость:</span><span id="payment-price">-</span></div>
+                                <div class="confirmation-total"><span>Итого:</span><span id="payment-total">-</span></div>
+                            </div>
+                            <button class="book-now" onclick="goToConfirmation()">Оплатить</button>
+                            <button class="btn-outline" style="width: 100%; margin-top: 0.5rem;" onclick="goToData()">Назад</button>
+                        </div>
+                        
+                        <div id="booking-confirmation" class="booking-section">
+                            <h3>Подтверждение бронирования</h3>
+                            <div class="confirmation-details">
+                                <div class="confirmation-item"><span>Тур:</span><span id="confirm-tour-name">-</span></div>
+                                <div class="confirmation-item"><span>Дата:</span><span id="confirm-date">-</span></div>
+                                <div class="confirmation-item"><span>Участники:</span><span id="confirm-participants">-</span></div>
+                                <div class="confirmation-item"><span>Имя:</span><span id="confirm-name">-</span></div>
+                                <div class="confirmation-item"><span>Email:</span><span id="confirm-email">-</span></div>
+                                <div class="confirmation-item"><span>Телефон:</span><span id="confirm-phone">-</span></div>
+                                <div class="confirmation-item"><span>Способ оплаты:</span><span id="confirm-payment">-</span></div>
+                                <div class="confirmation-total"><span>Итого:</span><span id="confirm-total">-</span></div>
+                            </div>
+                            <button class="book-now" onclick="completeBooking()">Подтвердить бронирование</button>
+                            <button class="btn-outline" style="width: 100%; margin-top: 0.5rem;" onclick="goToPayment()">Назад</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="success" class="page-content">
+        <section class="success-page">
+            <div class="container">
+                <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                <h1>Бронирование подтверждено!</h1>
+                <p>Ваш тур успешно забронирован. Подробности отправлены на вашу электронную почту.</p>
+                <p>Номер вашего заказа: <strong id="booking-number">TE-2025-001</strong></p>
+                <div class="success-actions">
+                    <button class="btn btn-primary" onclick="showPage('home')">На главную</button>
+                    <button class="btn btn-outline" onclick="showAccountSection('bookings')">Мои бронирования</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="account" class="page-content">
+        <section class="account-page">
+            <div class="container">
+                <div class="account-header"><h1 class="account-title">Личный кабинет</h1></div>
+                <div class="account-layout">
+                    <div class="account-sidebar">
+                        <div class="account-nav">
+                            <a href="#" class="active" onclick="showAccountSection('bookings')"><i class="fas fa-suitcase"></i> Мои бронирования</a>
+                            <a href="#" onclick="showAccountSection('history')"><i class="fas fa-history"></i> История заказов</a>
+                            <a href="#" onclick="showAccountSection('favorites')"><i class="fas fa-heart"></i> Избранное</a>
+                            <a href="#" onclick="showAccountSection('profile')"><i class="fas fa-cog"></i> Настройки профиля</a>
+                        </div>
+                    </div>
+                    <div class="account-content">
+                        <div id="bookings-section" class="account-section active"><h2>Мои бронирования</h2><div id="bookings-list"></div></div>
+                        <div id="history-section" class="account-section"><h2>История заказов</h2><div id="history-list"></div></div>
+                        <div id="favorites-section" class="account-section"><h2>Избранное</h2><div id="favorites-list"></div></div>
+                        <div id="profile-section" class="account-section">
+                            <h2>Настройки профиля</h2>
+                            <div class="profile-form">
+                                <div class="form-group"><label for="profile-name">Имя</label><input type="text" id="profile-name" value="Иван Иванов"></div>
+                                <div class="form-group"><label for="profile-email">Email</label><input type="email" id="profile-email" value="ivan@example.com"></div>
+                                <div class="form-group"><label for="profile-phone">Телефон</label><input type="tel" id="profile-phone" value="+7 (999) 123-45-67"></div>
+                                <div class="form-group"><label for="profile-birthdate">Дата рождения</label><input type="date" id="profile-birthdate" value="1990-05-15"></div>
+                                <button class="save-profile" onclick="saveProfile()">Сохранить изменения</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="about" class="page-content">
+        <section style="padding-top: 8rem; min-height: 100vh;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>О нас</h2>
+                    <p>Узнайте больше о компании TravelEasy</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p style="margin-bottom: 1.5rem; line-height: 1.8;">TravelEasy - это современная платформа для бронирования экскурсионных туров, созданная с целью сделать путешествия доступными и комфортными для каждого.</p>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.8;">Мы сотрудничаем только с проверенными гидами и туроператорами, чтобы обеспечить нашим клиентам высокое качество услуг и незабываемые впечатления от путешествий.</p>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.8;">Наша миссия - открывать мир для путешественников, предоставляя широкий выбор туров по разным направлениям и категориям, от исторических экскурсий до приключенческих походов.</p>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.8;">Основанная в 2020 году, компания TravelEasy уже успела завоевать доверие тысяч клиентов по всей России. Мы постоянно расширяем нашу сеть партнеров и добавляем новые уникальные маршруты, чтобы каждый мог найти путешествие по душе.</p>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.8;">Наша команда состоит из опытных путешественников и профессионалов туристической индустрии, которые знают все о лучших направлениях и готовы поделиться своими знаниями с вами.</p>
+                        <div style="text-align: center; margin-top: 3rem;"><button class="btn btn-primary" onclick="showPage('catalog')">Найти тур</button></div>
+                    </div>
+                    <div class="about-image">
+                        <img src="img/команда.jpeg" alt="Команда TravelEasy">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="contacts" class="page-content">
+        <section style="padding-top: 8rem; min-height: 100vh;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Контакты</h2>
+                    <p>Свяжитесь с нами любым удобным способом</p>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                    <div>
+                        <h3 style="margin-bottom: 1.5rem;">Наши контакты</h3>
+                        <div style="margin-bottom: 1.5rem;"><p><i class="fas fa-map-marker-alt"></i> <strong>Адрес:</strong> Астрахань, ул. Куликова, 42</p></div>
+                        <div style="margin-bottom: 1.5rem;"><p><i class="fas fa-phone"></i> <strong>Телефон:</strong> +7 (917) 111-77-80</p></div>
+                        <div style="margin-bottom: 1.5rem;"><p><i class="fas fa-envelope"></i> <strong>Email:</strong> info@traveleasy.ru</p></div>
+                        <div style="margin-bottom: 1.5rem;"><p><i class="fas fa-clock"></i> <strong>Режим работы:</strong> Пн-Пт: 9:00-20:00, Сб-Вс: 10:00-18:00</p></div>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 1.5rem;">Напишите нам</h3>
+                        <div class="form-group"><label for="contact-name">Ваше имя</label><input type="text" id="contact-name"></div>
+                        <div class="form-group"><label for="contact-email">Email</label><input type="email" id="contact-email"></div>
+                        <div class="form-group"><label for="contact-message">Сообщение</label><textarea id="contact-message" rows="5" style="width: 100%; padding: 0.9rem; border: 1px solid var(--light-gray); border-radius: 8px;"></textarea></div>
+                        <button class="btn btn-primary">Отправить сообщение</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-form">
+            <button class="auth-close" onclick="closeAuthModal()">&times;</button>
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')">Вход</button>
+                <button class="auth-tab" onclick="switchAuthTab('register')">Регистрация</button>
+            </div>
+            
+            <div id="login-content" class="auth-content active">
+                <h3 style="margin-bottom: 1.5rem; text-align: center;">Вход в аккаунт</h3>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="example@mail.com">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" placeholder="Введите пароль">
+                </div>
+                <button class="book-now" onclick="login()">Войти</button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--gray);">Нет аккаунта? <a href="#" onclick="switchAuthTab('register')" style="color: var(--primary);">Зарегистрируйтесь</a></p>
+            </div>
+            
+            <div id="register-content" class="auth-content">
+                <h3 style="margin-bottom: 1.5rem; text-align: center;">Регистрация</h3>
+                <div class="form-group">
+                    <label for="register-name">Имя</label>
+                    <input type="text" id="register-name" placeholder="Иван Иванов">
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" placeholder="example@mail.com">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Пароль</label>
+                    <input type="password" id="register-password" placeholder="Введите пароль">
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm-password">Подтвердите пароль</label>
+                    <input type="password" id="register-confirm-password" placeholder="Повторите пароль">
+                </div>
+                <button class="book-now" onclick="register()">Зарегистрироваться</button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--gray);">Уже есть аккаунт? <a href="#" onclick="switchAuthTab('login')" style="color: var(--primary);">Войдите</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TravelEasy</h3>
+                    <p>Ваш надежный партнер в организации незабываемых путешествий и экскурсий по всему миру.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home')"><i class="fas fa-chevron-right"></i> Главная</a></li>
+                        <li><a href="#" onclick="showPage('catalog')"><i class="fas fa-chevron-right"></i> Каталог туров</a></li>
+                        <li><a href="#" onclick="showPage('about')"><i class="fas fa-chevron-right"></i> О нас</a></li>
+                        <li><a href="#" onclick="showPage('contacts')"><i class="fas fa-chevron-right"></i> Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('catalog')"><i class="fas fa-chevron-right"></i> Исторические туры</a></li>
+                        <li><a href="#" onclick="showPage('catalog')"><i class="fas fa-chevron-right"></i> Природные туры</a></li>
+                        <li><a href="#" onclick="showPage('catalog')"><i class="fas fa-chevron-right"></i> Культурные туры</a></li>
+                        <li><a href="#" onclick="showPage('catalog')"><i class="fas fa-chevron-right"></i> Приключенческие туры</a></li>
+                        <li><a href="#" onclick="showPage('catalog')"><i class="fas fa-chevron-right"></i> Гастрономические туры</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Астрахань, ул. Куликова, 42</a></li>
+                        <li><a href="tel:+74951234567"><i class="fas fa-phone"></i> +7 (917) 111-77-80</a></li>
+                        <li><a href="mailto:info@traveleasy.ru"><i class="fas fa-envelope"></i> info@traveleasy.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright"><p>&copy; 2025 TravelEasy. Все права защищены.</p></div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
